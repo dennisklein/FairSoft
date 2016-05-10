@@ -56,25 +56,26 @@ then
   cp -r include/Pythia8 $install_prefix/include
 
   mkdir -p $install_prefix/share/pythia8
-  cp -r xmldoc $install_prefix/share/pythia8
+  cp -r share/Pythia8/xmldoc $install_prefix/share/pythia8
+  ln -s $install_prefix/share/pythia8 $install_prefix/share/Pythia8
 
   if [ "$platform" = "macosx" ];
   then
     cp lib/libpythia8.dylib $install_prefix/lib
-    cp lib/liblhapdfdummy.dylib $install_prefix/lib
-    cp lib/libpythia8tohepmc.dylib $install_prefix/lib
+#    cp lib/liblhapdfdummy.dylib $install_prefix/lib
+#    cp lib/libpythia8tohepmc.dylib $install_prefix/lib
     cd $install_prefix/lib
     for file in $(ls libpythia8*.dylib); do
       install_name_tool -id $install_prefix/lib/$file $file
     done
-    for file in $(ls liblhapdf*.dylib); do
-      install_name_tool -id $install_prefix/lib/$file $file
-    done
+#    for file in $(ls liblhapdf*.dylib); do
+#      install_name_tool -id $install_prefix/lib/$file $file
+#    done
     create_links dylib so
   else
     cp lib/libpythia8.so $install_prefix/lib
-    cp lib/liblhapdfdummy.so $install_prefix/lib
-    cp lib/libpythia8tohepmc.so $install_prefix/lib
+#    cp lib/liblhapdfdummy.so $install_prefix/lib
+#    cp lib/libpythia8tohepmc.so $install_prefix/lib
   fi
 
   check_all_libraries $install_prefix/lib
