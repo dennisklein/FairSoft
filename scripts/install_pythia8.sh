@@ -28,10 +28,7 @@ then
 
   cd $SIMPATH/generators/pythia8
 
-  # needed to compile with Apple LLVM 5.1, shouldn't hurt on other systems
-  mypatch ../pythia8_friend.patch | tee -a $logfile
-
-  USRLDFLAGSSHARED="$CXXFLAGS" ./configure  --enable-shared --with-hepmc=$HEPINSTALLDIR --with-hepmcversion=$HEPMCVERSION
+  USRLDFLAGSSHARED="$CXXFLAGS" ./configure  --enable-shared --with-hepmc2=$HEPINSTALLDIR
 
   if [ "$compiler" = "PGI" ];
   then
