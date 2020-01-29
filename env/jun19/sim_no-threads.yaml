@@ -9,6 +9,7 @@ spack:
     - googletest@1.8.1
     - boost@1.68.0
     - fairlogger@1.4.0
+    - fairmq@1.4.3
     - pythia6@428-alice1
     - pythia8@8240
     - geant4@10.05.p01~qt~vecgeom~opengl~x11~motif~data~clhep~threads
