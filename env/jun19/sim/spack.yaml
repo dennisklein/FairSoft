@@ -1,0 +1,25 @@
+spack:
+  include:
+  - system_packages.yaml
+  definitions:
+  - when: platform == 'linux'
+    root: [root@6.16.00+fortran+gdml+http+memstat+pythia6+pythia8+vc~vdt+python+tmva
+        ^mesa~llvm ^python@2.7]
+  - when: platform == 'darwin'
+    root: [root@6.16.00+fortran+gdml+http+memstat+pythia6+pythia8+vc~vdt+python+tmva+aqua
+        ^python@2.7]
+  specs:
+  - boost@1.68.0
+  - dds@2.4
+  - fairlogger@1.4.0
+  - fairmq@1.4.3 ^googletest@1.8.1
+  - hepmc@2.06.09 length=CM momentum=GEV
+  - pythia6@428-alice1
+  - pythia8@8240
+  - geant3@v2-7_fairsoft
+  - geant4@10.05.p01~qt~vecgeom~opengl~x11~motif~data~clhep~threads
+  - vgm@4-5
+  - geant4_vmc@4-0-p1
+  - $root
+  - fairroot@18.2.1+sim
+  concretization: together

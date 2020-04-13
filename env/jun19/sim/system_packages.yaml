@@ -1,0 +1,131 @@
+# Fedora31: dnf install bzip2-devel cmake davix-devel fontconfig-devel git flatbuffers-devel gtest-devel gnutls-devel gsl-devel hwloc-devel tbb-devel libevent-devel libICE-devel libjpeg-turbo-devel libpng-devel libSM-devel libX11-devel libXext-devel libXft-devel libXpm-devel libxml2-devel mesa-filesystem mesa-dri-drivers mesa-vulkan-drivers mesa-khr-devel mesa-libGL-devel mesa-vulkan-devel mesa-libEGL-devel mesa-libgbm-devel mesa-libGLw-devel mesa-libGLU-devel mesa-libGLES-devel mesa-libOpenCL-devel mesa-libOSMesa-devel mesa-libxatracker-devel mesa-libd3d-devel python2-devel python2-numpy rsync unuran-devel xerces-c-devel xxhash-devel zeromq-devel zlib-devel xz-devel msgpack-devel nanomsg-devel ninja-build ncurses-devel openblas-devel openssl-devel pcre-devel pmix-devel pkgconf expat-devel
+packages:
+  bzip2:
+    paths:
+      "bzip2@1.0.8 os=fedora31": /usr
+  cmake:
+    paths:
+      "cmake@3.16.3 os=fedora31": /usr
+  davix:
+    paths:
+      "davix@0.7.5 os=fedora31": /usr
+  expat:
+    paths:
+      "expat@2.2.8 os=fedora31": /usr
+  fontconfig:
+    paths:
+      "fontconfig@2.13.92 os=fedora31": /usr
+  git:
+    paths:
+      "git@2.24.1 os=fedora31": /usr
+  flatbuffers:
+    paths:
+      "flatbuffers@1.11.0 os=fedora31": /usr
+  googletest:
+    paths:
+      "googletest@1.8.1 os=fedora31": /usr
+  gnutls:
+    paths:
+      "gnutls@3.6.12 os=fedora31": /usr
+  gsl:
+    paths:
+      "gsl@2.5 os=fedora31": /usr
+  hwloc:
+    paths:
+      "hwloc@2.0.4 os=fedora31": /usr
+  intel-tbb:
+    paths:
+      "intel-tbb@2020.1 os=fedora31": /usr
+  libevent:
+    paths:
+      "libevent@2.1.8 os=fedora31": /usr
+  libice:
+    paths:
+      "libice@1.0.10 os=fedora31": /usr
+  libjpeg-turbo:
+    paths:
+      "libjpeg-turbo@2.0.2 os=fedora31": /usr
+  libpng:
+    paths:
+      "libpng@1.6.37 os=fedora31": /usr
+  libsm:
+    paths:
+      "libsm@1.2.3 os=fedora31": /usr
+  libx11:
+    paths:
+      "libx11@1.6.9 os=fedora31": /usr
+  libxext:
+    paths:
+      "libxext@1.3.4 os=fedora31": /usr
+  libxft:
+    paths:
+      "libxft@2.3.3 os=fedora31": /usr
+  libxml2:
+    paths:
+      "libxml2@2.9.10 os=fedora31": /usr
+  libxpm:
+    paths:
+      "libxpm@3.5.12 os=fedora31": /usr
+  lz4:
+    paths:
+      "lz4@1.9.1 os=fedora31": /usr
+  mesa:
+    paths:
+      "mesa@19.2.8~llvm os=fedora31": /usr
+  mesa-glu:
+    paths:
+      "mesa-glu@9.0.1 os=fedora31": /usr
+  msgpack-c:
+    paths:
+      "msgpack-c@3.1.0 os=fedora31": /usr
+  nanomsg:
+    paths:
+      "nanomsg@1.1.5 os=fedora31": /usr
+  ninja:
+    paths:
+      "ninja@1.9.0 os=fedora31": /usr
+  ncurses:
+    paths:
+      "ncurses@6.1 os=fedora31": /usr
+  openblas:
+    paths:
+      "openblas@0.3.9 os=fedora31": /usr
+  openssl:
+    paths:
+      "openssl@1.1.1d os=fedora31": /usr
+  pcre:
+    paths:
+      "pcre@8.43 os=fedora31": /usr
+  pmix:
+    paths:
+      "pmix@3.1.5 os=fedora31": /usr
+  pkgconf:
+    paths:
+      "pkgconf@1.6.3 os=fedora31": /usr
+  python:
+    paths:
+      "python@2.7 os=fedora31": /usr
+  py-numpy:
+    paths:
+      "py-numpy@1.16.4 os=fedora31": /usr
+  rsync:
+    paths:
+      "rsync@3.1.3 os=fedora31": /usr
+  unuran:
+    paths:
+      "unuran@1.8.1 os=fedora31": /usr
+  xerces-c:
+    paths:
+      "xerces-c@3.2.2 cxxstd=11 os=fedora31": /usr
+  xxhash:
+    paths:
+      "xxhash@0.7.3 os=fedora31": /usr
+  zeromq:
+    paths:
+      "zeromq@4.3.2 os=fedora31": /usr
+  zlib:
+    paths:
+      "zlib@1.2.11 os=fedora31": /usr
+  xz:
+    paths:
+      "xz@5.2.4 os=fedora31": /usr
