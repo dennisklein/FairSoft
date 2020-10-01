@@ -26,25 +26,73 @@ class Fairroot(CMakePackage):
             description='Enable simulation engines and event generators')
     variant('examples', default=False,
             description='Install examples')
+    variant('pin', default='develop', values=('develop', 'jun19', 'none'), multi=False,
+            description='Use certain dependency versions pinned in the given FairSoft release.')
 
     depends_on('cmake@3.13.4:', type='build')
+
     depends_on('boost@1.68.0: cxxstd=11 +container')
+    depends_on('boost@1.68.0 cxxstd=11 +container', when='pin=jun19')
+
+    depends_on('dds@3.0', when='pin=jun19')
+
     depends_on('fairlogger@1.4.0:')
+    depends_on('fairlogger@1.4.0', when='pin=jun19')
+
     depends_on('fairmq@1.4.11:')
-    depends_on('fairsoft-config', when='@:18,develop')
+    depends_on('fairmq@1.4.11', when='pin=jun19')
+
     depends_on('flatbuffers')
-    depends_on('geant3', when="+sim")
-    depends_on('geant4', when="+sim")
-    depends_on('geant4-vmc', when="+sim")
+
+    depends_on('geant4')
+    depends_on('geant4@10.5.1~qt~vecgeom~opengl~x11~motif~threads', when='pin=jun19')
+
     depends_on('googletest@1.7.0:')
+    depends_on('googletest@1.8.1', when='pin=jun19')
+
+    depends_on('hepmc@2.06.09 length=CM momentum=GEV', when='pin=jun19')
+
     depends_on('msgpack-c@3.1:', when='+examples')
+
     depends_on('protobuf')
+
     depends_on('pythia6', when='+sim')
+    depends_on('pythia6@428-alice1', when='+sim pin=jun19')
+
     depends_on('pythia8', when='+sim')
-    depends_on('root+http')
-    depends_on('vgm', when="+sim")
+    depends_on('pythia8@8240', when='+sim pin=jun19')
+
+    depends_on('root+http', when='pin=none')
+
+    depends_on('fairsoft-config', when='pin=none')
+
+    depends_on('geant3', when='pin=none')
+
+    depends_on('geant4-vmc', when='+sim pin=none')
+
+    _rootspec = {}
+    _rootspec['linux']  = 'root@6.16.00+fortran+gdml+memstat+pythia6+pythia8+vc~vdt+python+tmva+xrootd+sqlite ^mesa~llvm'
+    _rootspec['darwin'] = 'root@6.16.00+fortran+gdml+memstat+pythia6+pythia8+vc~vdt+python+tmva+xrootd+sqlite+aqua'
+    for platform in ['linux', 'darwin']:
+        depends_on(_rootspec[platform], when='pin=jun19 platform={}'.format(platform))
+
+        depends_on('fairsoft-config@jun19 ^{}'.format(_rootspec[platform]), when='pin=jun19 platform={}'.format(platform))
+
+        depends_on('geant3@2.7 ^{}'.format(_rootspec[platform]), when='pin=jun19 platform={}'.format(platform))
+
+        depends_on('geant4-vmc@4-0-p1 ^{}'.format(_rootspec[platform]), when='+sim pin=jun19 platform={}'.format(platform))
+
+    depends_on('vgm', when='+sim')
+    depends_on('vgm@4-5', when='+sim pin=jun19')
+
     depends_on('vmc', when='@18.4: ^root@6.18:')
+
     depends_on('yaml-cpp', when='@18.2:')
+
+    ### jun19 concretizer hints
+    depends_on('python@2.7.18', when='pin=jun19')
+    depends_on('py-numpy@1.16.6', when='pin=jun19')
+    depends_on('py-setuptools@44.1.0', when='pin=jun19')
 
     patch('cmake_utf8.patch', when='@18.2.1')
     patch('fairlogger_incdir.patch', level=0, when='@18.2.1')
