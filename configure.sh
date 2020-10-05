@@ -73,42 +73,6 @@ check_cmd "git" "https://git-scm.com/downloads"
 basedir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 init_dialog
 
-### compiler
-compiler="gcc"
-
-show_dialog --title "Compiler" \
-  --radiolist "Choose the compiler to compile the external packages:" 13 60 5 \
-    gcc "GCC (Linux, and older versions of Mac OSX)" on \
-    Clang "Clang (Mac OSX)" off \
-    intel "Intel Compiler (Linux)" off \
-    CC "CC (Solaris)" off \
-    PGI "Portland Compiler" off
-
-case $? in
-  $DIALOG_OK) compiler=$result ;;
-  *) dialog_default_handlers $? ;;
-esac
-
-### compile options
-debug=yes
-optimize=yes
-
-show_dialog --title "Compile options" \
-  --checklist "" 8 52 2 \
-  debug "Enable debug information" on \
-  optimize "Enable optimization" on
-
-echo $result
-case $? in
-  $DIALOG_OK)
-    res=($result)
-    debug=no
-    optimize=no
-    for k in "${res[@]}"; do declare "${k}=yes"; done
-    ;;
-  *) dialog_default_handlers $? ;;
-esac
-
 ### packages
 packages=full
 
@@ -136,6 +100,26 @@ show_dialog --title "Package options" \
 case $? in
   $DIALOG_OK)
     res=($result)
+    for k in "${res[@]}"; do declare "${k}=yes"; done
+    ;;
+  *) dialog_default_handlers $? ;;
+esac
+
+### compile options
+debug=yes
+optimize=yes
+
+show_dialog --title "Compile options" \
+  --checklist "" 8 52 2 \
+  debug "Enable debug information" on \
+  optimize "Enable optimization" on
+
+echo $result
+case $? in
+  $DIALOG_OK)
+    res=($result)
+    debug=no
+    optimize=no
     for k in "${res[@]}"; do declare "${k}=yes"; done
     ;;
   *) dialog_default_handlers $? ;;
@@ -171,14 +155,13 @@ esac
 show_dialog --title "Summary" --ok-label "Install" \
   --form "" 15 100 0 \
     "FairSoft version"      1 2 "$version"    1 24 0 0 \
-    "Compiler"              2 2 "$compiler"   2 24 0 0 \
-    "Debug info"            3 2 "$debug"      3 24 0 0 \
-    "Optimize"              4 2 "$optimize"   4 24 0 0 \
-    "Package set"           5 2 "$packages"   5 24 0 0 \
-    "Multi-threaded Geant4" 6 2 "$geant4mt"   6 24 0 0 \
-    "Python bindings"       7 2 "$python"     7 24 0 0 \
-    "Build dir"             8 2 "$builddir"   8 24 0 0 \
-    "Install dir (SIMPATH)" 9 2 "$installdir" 9 24 0 0
+    "Debug info"            2 2 "$debug"      2 24 0 0 \
+    "Optimize"              3 2 "$optimize"   3 24 0 0 \
+    "Package set"           4 2 "$packages"   4 24 0 0 \
+    "Multi-threaded Geant4" 5 2 "$geant4mt"   5 24 0 0 \
+    "Python bindings"       6 2 "$python"     6 24 0 0 \
+    "Build dir"             7 2 "$builddir"   7 24 0 0 \
+    "Install dir (SIMPATH)" 8 2 "$installdir" 8 24 0 0
 
 case $? in
   $DIALOG_OK) ;;
@@ -187,6 +170,7 @@ esac
 
 ### install
 mkdir -p "$builddir"
-pushd "$builddir"
-cmake -D METHOD=LEGACY -D CMAKE_INSTALL_PREFIX="$(realpath $installdir)" "$(realpath $basedir)"
-cmake --build .
+cmake -S "$basedir" -B "$builddir" \
+  -D BUILD_METHOD=legacy \
+  -D CMAKE_INSTALL_PREFIX="$installdir"
+cmake --build "$builddir" --parallel
