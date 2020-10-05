@@ -54,6 +54,8 @@ function check_cmd() {
     echo "  CentOS/OpenSuse: yum install $cmd"
     echo "           Source: $src"
     echo ""
+    echo "Exiting now."
+    exit 1
   fi
 }
 
