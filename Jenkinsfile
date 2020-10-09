@@ -42,7 +42,6 @@ def jobMatrix(String node_type, String ctestcmd, List specs, Closure callback) {
 
           legacy = isLegacyChange() // needs to run after scm checkout in node context
           if (legacy) {
-            ctestcmd = ctestcmd + ' -DBUILD_METHOD=legacy'
             container = container.replace('sif', 'legacy.sif')
           }
 
@@ -78,8 +77,11 @@ pipeline {
   }
   agent none
   stages {
-    stage('Info Stage') {
+    stage('Info Stage / master checkout') {
       steps {
+        node('master') {
+          checkout scm
+        }
         echo "BRANCH_NAME: ${BRANCH_NAME}"
         echo "env.BRANCH_NAME: ${env.BRANCH_NAME}"
         echo "env.CHANGE_ID: ${env.CHANGE_ID}"
@@ -102,6 +104,11 @@ pipeline {
             [os: 'openSUSE-15.0', container: 'opensuse.15.0.sif'],
             [os: 'openSUSE-15.2', container: 'opensuse.15.2.sif'],
           ]
+
+          legacy = isLegacyChange() // needs to run after scm checkout on master
+          if (legacy) {
+            ctestcmd = ctestcmd + ' -DBUILD_METHOD=legacy'
+          }
 
           if (env.CHANGE_ID != null) {
               specs_list = specs_list.findAll {
