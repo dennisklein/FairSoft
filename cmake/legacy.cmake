@@ -49,6 +49,10 @@ endif()
 unset(python)
 if(PYTHON_EXECUTABLE)
   set(python "-DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}")
+  get_filename_component(PYTHON_EXECUTABLE_FILE "${PYTHON_EXECUTABLE}" FILENAME)
+  get_filename_component(PYTHON_EXECUTABLE_DIR "${PYTHON_EXECUTABLE}" DIRECTORY)
+  get_filename_component(PYTHON_PREFIX "${PYTHON_EXECUTABLE_DIR}/.." ABSOLUTE)
+  set(boost_python_config "--with-python=${PYTHON_EXECUTABLE_FILE} --with-python-root=${PYTHON_PREFIX}")
 endif()
 set(LOG_TO_FILE
   LOG_DIR "${CMAKE_BINARY_DIR}/Log"
@@ -95,6 +99,7 @@ ExternalProject_Add(boost
   BUILD_IN_SOURCE ON
   CONFIGURE_COMMAND "./bootstrap.sh"
     "--prefix=${CMAKE_INSTALL_PREFIX}"
+    ${boost_python_config}
   PATCH_COMMAND ${patch} -p2 -i "${CMAKE_SOURCE_DIR}/legacy/boost/1.72_boost_process.patch"
   BUILD_COMMAND "./b2" "--layout=system"
     "cxxstd=${CMAKE_CXX_STANDARD}"
