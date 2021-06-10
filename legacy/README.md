@@ -94,8 +94,9 @@ please contact us.
 
 | **Package** | **Version** | **URL** |
 | --- | --- | --- |
+<<<<<<< HEAD
 | asio             | 1.18.1       | https://think-async.com/Asio/ |
-| boost            | 1.75.0       | https://www.boost.org/ |
+| boost            | 1.76.0       | https://www.boost.org/ |
 | clhep            | 2.4.4.0      | http://proj-clhep.web.cern.ch |
 | dds              | 3.5.10       | http://dds.gsi.de |
 | faircmakemodules | 0.2.0        | https://github.com/FairRootGroup/FairCMakeModules |
