@@ -389,6 +389,7 @@ if(PACKAGE_SET STREQUAL full)
       "-Dspectrum=ON"
       "-Dsqlite=ON"
       "-Dtmva=ON"
+      "-Dtmva-sofie=ON"
       "-Dvc=ON"
       "-Dvdt=OFF"
       "-Dxml=ON"
